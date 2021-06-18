@@ -150,8 +150,6 @@ class LoginController extends AbstractLoginFormController
         }
         $this->handleRedirect();
 
-        $this->eventDispatcher->dispatch(new ModifyLoginFormViewEvent($this->view));
-
         $this->view->assignMultiple(
             [
                 'cookieWarning' => $this->showCookieWarning,
@@ -164,6 +162,8 @@ class LoginController extends AbstractLoginFormController
                 'noRedirect' => $this->isRedirectDisabled(),
             ]
         );
+        
+        $this->eventDispatcher->dispatch(new ModifyLoginFormViewEvent($this->view));
     }
 
     /**
